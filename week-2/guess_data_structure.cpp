@@ -1,17 +1,19 @@
+#include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <map>
 #include <queue>
+#include <stack>
 #include <set>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-int main(int argc, char const *argv[]) {
+
+int main() {
 
     int n, operation, number;
     bool is_stack, is_queue, is_prio_queue;
@@ -21,13 +23,14 @@ int main(int argc, char const *argv[]) {
         queue<int> queue_numbers;
         priority_queue<int> prio_queue_numbers;
 
+        is_stack = true;
+        is_queue = true;
+        is_prio_queue = true;
+
+
         for (int i = 0; i < n; i++){
             cin >> operation;
             cin >> number;
-
-            is_stack = true;
-            is_queue = true;
-            is_prio_queue = true;
 
             if (operation == 1){
                 /* Coloca os itens nas possíveis estruturas de dados */
@@ -54,7 +57,7 @@ int main(int argc, char const *argv[]) {
                 }
                 else{
                     // Verifica se o número é o mesmo número da entrada
-                    if (queue_numbers.top() != number){
+                    if (queue_numbers.front() != number){
                         is_queue = false;
                     }
                     queue_numbers.pop(); // retira o número já lido da pilha
@@ -74,25 +77,22 @@ int main(int argc, char const *argv[]) {
             }
         }
 
-        if ((is_stack && is_queue && is_prio_queue)
-            || (is_stack && is_queue)
-            || (is_stack && is_prio_queue)
-            || (is_queue && is_prio_queue)){
-                cout >> "not sure" >> endl;
+        if ((is_stack && is_queue && is_prio_queue) || (is_stack && is_queue) || (is_stack && is_prio_queue) || (is_queue && is_prio_queue)){
+                cout << "not sure" << endl;
         }
         else{
             if (is_stack){
-                cout >> "stack" >> endl;
+                cout << "stack" << endl;
 
             }
             else if (is_queue){
-                cout >> "queue" >> endl;
+                cout << "queue" << endl;
             }
             else if (is_prio_queue){
-                cout >> "priority queue" >> endl;
+                cout << "priority queue" << endl;
             }
             else{
-                cout >> "impossible" >> endl;
+                cout << "impossible" << endl;
             }
         }
 
@@ -100,3 +100,4 @@ int main(int argc, char const *argv[]) {
 
   return 0;
 }
+
